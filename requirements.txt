@@ -1,1 +1,8 @@
 streamlit
+apscheduler
+numpy>=2.2.5
+pandas>=2.2.3
+plotly>=6.1.0
+requests>=2.32.3
+streamlit>=1.45.1
+tabs>=0.7.0
