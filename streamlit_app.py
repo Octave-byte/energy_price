@@ -1,6 +1,9 @@
 import streamlit as st
 from data_loader import load_data
-from .tabs import price_tab, production_tab, load_tab
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent))
+from tabs import price_tab, production_tab, load_tab
 
 st.set_page_config(page_title="Energy Dashboard", layout="wide")
 
