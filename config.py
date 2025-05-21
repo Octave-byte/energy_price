@@ -1,6 +1,6 @@
 import streamlit as st
 SUPABASE_API_KEY = st.secrets["auth_token"]
-SUPABASE_URL = "https://qkonktvwcbfkehznugum.supabase.co"
+SUPABASE_URL = st.secrets["url"]
 
 HEADERS = {
     "apikey": SUPABASE_API_KEY,
