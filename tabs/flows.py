@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from data_fetcher import get_transfer_data, get_consumption_data
+from data_loader import get_transfer_data, get_consumption_data
 import visualizations as viz
 
 def display_transfer_tab(data):
