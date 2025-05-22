@@ -10,7 +10,8 @@ def render(load_df):
     latest = daily.sort_values('day', ascending=False).iloc[0]
 
     col1, col2 = st.columns(2)
-    col1.metric("Total Load (Yesterday)", f"{latest['total_load']} MWh")
+    value = f"{latest['total_load']:,.0f}"  # Formats with 0 decimals and commas → '12,345'
+    col1.metric("Total Load (Yesterday)", f"{value} MWh")
     col2.metric("Days of Data", len(daily))
 
     st.line_chart(daily.sort_values("day").set_index("day")["total_load"])

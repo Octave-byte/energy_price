@@ -37,7 +37,7 @@ def render(prod_df):
         'pct_nuclear': 'Nuclear (%)',
         'pct_other': 'Other (%)'
     }, inplace=True)
-    st.line_chart(mix_daily[["Renewables (%)", "Nuclear (%)", "Other (%)"]])
+    st.bar_chart(mix_daily.set_index('date')[["Renewables (%)", "Nuclear (%)", "Other (%)"]])
 
     st.divider()
 
