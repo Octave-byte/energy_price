@@ -13,8 +13,8 @@ def render(price_df, load_df):
     europe_dict = dict(zip(europe_df['period'], europe_df['weighted_avg_price']))
 
     col1, col2 = st.columns(2)
-    col1.metric("Average Price (1 Day)", f"{europe_dict.get('1d', 0):,.0f} €/MWh")
-    col2.metric("Average Price (7 Days)", f"{europe_dict.get('7d', 0):,.0f} €/MWh")
+    col1.metric("Average Price (1 Day)", f"{europe_dict.get('1d', 0)} €/MWh")
+    col2.metric("Average Price (7 Days)", f"{europe_dict.get('7d', 0)} €/MWh")
 
     st.divider()
 
@@ -24,7 +24,7 @@ def render(price_df, load_df):
         'avg_7d': 'Avg. 7 Days',
         'avg_30d': 'Avg. 30 Days'
     })
-    st.dataframe(df_avg.style.format("{:,.0f}"), use_container_width=True)
+    st.dataframe(df_avg, use_container_width=True)
 
     st.divider()
 
@@ -34,7 +34,7 @@ def render(price_df, load_df):
         'std_7d': 'Std. Dev 7 Days',
         'std_30d': 'Std. Dev 30 Days'
     })
-    st.dataframe(df_vol.style.format("{:,.0f}"), use_container_width=True)
+    st.dataframe(df_vol, use_container_width=True)
 
     st.divider()
 
@@ -43,6 +43,6 @@ def render(price_df, load_df):
         'avg_price': 'Average Price',
         'price_percentile': 'Percentile Rank'
     })
-    st.dataframe(df_pct.style.format({"Average Price": "{:,.0f}", "Percentile Rank": "{:,.0f}"}), use_container_width=True)
+    st.dataframe(df_pct, use_container_width=True)
 
     

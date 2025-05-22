@@ -24,7 +24,7 @@ def render(prod_df):
         'other': 'Other',
         'total': 'Total'
     })
-    st.dataframe(df_mix.style.format("{:,.0f}"), use_container_width=True)
+    st.dataframe(df_mix, use_container_width=True)
 
     st.divider()
 
@@ -35,7 +35,7 @@ def render(prod_df):
         'pct_nuclear': 'Nuclear (%)',
         'pct_other': 'Other (%)'
     }, inplace=True)
-    st.line_chart(mix_daily.set_index("date")[["Renewables (%)", "Nuclear (%)", "Other (%)"]])
+    st.line_chart(mix_daily,[["Renewables (%)", "Nuclear (%)", "Other (%)"]])
 
     st.divider()
 
@@ -45,4 +45,4 @@ def render(prod_df):
         'total_7d': 'Total (7 Days)',
         'total_30d': 'Total (30 Days)'
     })
-    st.dataframe(summary.style.format("{:,.0f}"), use_container_width=True)
+    st.dataframe(summary, use_container_width=True)
