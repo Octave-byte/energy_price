@@ -142,7 +142,7 @@ def compute_price_volatility_by_country(price_df: pd.DataFrame) -> pd.DataFrame:
 def compute_price_percentile_by_country(price_df: pd.DataFrame) -> pd.DataFrame:
     d7 = pd.Timestamp.now(tz='UTC') - timedelta(days=7)
     recent_avg = price_df[price_df['datetime'] >= d7].groupby(
-        ['country_code', 'country_name']
+        ['country_name']
     )['price'].mean().reset_index(name='avg_price')
 
     recent_avg['price_percentile'] = recent_avg['avg_price'].rank(pct=True) * 100

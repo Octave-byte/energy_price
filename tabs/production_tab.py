@@ -19,6 +19,7 @@ def render(prod_df):
 
     st.subheader("Production Breakdown by Country (Last 1 Day)")
     df_mix = compute_mix_breakdown_by_country(prod_df).rename(columns={
+        'country_name': 'Country',
         'renewables': 'Renewables',
         'nuclear': 'Nuclear',
         'other': 'Other',
@@ -31,16 +32,18 @@ def render(prod_df):
     st.subheader("Europe-wide Daily Production Mix (Last 30 Days)")
     mix_daily = compute_weighted_mix_daily(prod_df)
     mix_daily.rename(columns={
+        'country_name': 'Country',
         'pct_renewables': 'Renewables (%)',
         'pct_nuclear': 'Nuclear (%)',
         'pct_other': 'Other (%)'
     }, inplace=True)
-    st.line_chart(mix_daily,[["Renewables (%)", "Nuclear (%)", "Other (%)"]])
+    st.line_chart(mix_daily[["Renewables (%)", "Nuclear (%)", "Other (%)"]])
 
     st.divider()
 
     st.subheader("Total Production by Country")
     summary = summary.rename(columns={
+        'country_name': 'Country',
         'total_1d': 'Total (1 Day)',
         'total_7d': 'Total (7 Days)',
         'total_30d': 'Total (30 Days)'

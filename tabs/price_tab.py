@@ -20,6 +20,7 @@ def render(price_df, load_df):
 
     st.subheader("Average Electricity Prices in €/MWH")
     df_avg = compute_avg_price_by_country(price_df).rename(columns={
+        'country_name': 'Country',
         'avg_1d': 'Avg. 1 Day',
         'avg_7d': 'Avg. 7 Days',
         'avg_30d': 'Avg. 30 Days'
@@ -30,6 +31,7 @@ def render(price_df, load_df):
 
     st.subheader("Price Volatility (Standard Deviation)")
     df_vol = compute_price_volatility_by_country(price_df).rename(columns={
+        'country_name': 'Country',
         'std_1d': 'Std. Dev 1 Day',
         'std_7d': 'Std. Dev 7 Days',
         'std_30d': 'Std. Dev 30 Days'
@@ -40,6 +42,7 @@ def render(price_df, load_df):
 
     st.subheader("Price Percentile Ranking")
     df_pct = compute_price_percentile_by_country(price_df).rename(columns={
+        'country_name': 'Country',
         'avg_price': 'Average Price',
         'price_percentile': 'Percentile Rank'
     })

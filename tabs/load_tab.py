@@ -19,6 +19,7 @@ def render(load_df):
 
     st.subheader("Total Load by Country (1 Day, 7 Days, 30 Days)")
     country_summary = compute_total_load_by_country(load_df).rename(columns={
+        'country_name': 'Country',
         'load_1d': 'Load (1 Day)',
         'load_7d': 'Load (7 Days)',
         'load_30d': 'Load (30 Days)'
