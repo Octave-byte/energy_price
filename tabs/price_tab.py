@@ -7,14 +7,42 @@ from utils.helpers import (
 )
 
 def render(price_df, load_df):
-    st.subheader("Average Electricity Prices")
-    st.dataframe(compute_avg_price_by_country(price_df), use_container_width=True)
+
+    st.subheader("Europe-wide Weighted Average Price (in €/MWH)")
+    europe_df = compute_weighted_avg_price_europe(price_df, load_df)
+    europe_dict = dict(zip(europe_df['period'], europe_df['weighted_avg_price']))
+
+    col1, col2 = st.columns(2)
+    col1.metric("Average Price (1 Day)", f"{europe_dict.get('1d', 0):,.0f} €/MWh")
+    col2.metric("Average Price (7 Days)", f"{europe_dict.get('7d', 0):,.0f} €/MWh")
+
+    st.divider()
+
+    st.subheader("Average Electricity Prices in €/MWH")
+    df_avg = compute_avg_price_by_country(price_df).rename(columns={
+        'avg_1d': 'Avg. 1 Day',
+        'avg_7d': 'Avg. 7 Days',
+        'avg_30d': 'Avg. 30 Days'
+    })
+    st.dataframe(df_avg.style.format("{:,.0f}"), use_container_width=True)
+
+    st.divider()
 
     st.subheader("Price Volatility (Standard Deviation)")
-    st.dataframe(compute_price_volatility_by_country(price_df), use_container_width=True)
+    df_vol = compute_price_volatility_by_country(price_df).rename(columns={
+        'std_1d': 'Std. Dev 1 Day',
+        'std_7d': 'Std. Dev 7 Days',
+        'std_30d': 'Std. Dev 30 Days'
+    })
+    st.dataframe(df_vol.style.format("{:,.0f}"), use_container_width=True)
+
+    st.divider()
 
     st.subheader("Price Percentile Ranking")
-    st.dataframe(compute_price_percentile_by_country(price_df), use_container_width=True)
+    df_pct = compute_price_percentile_by_country(price_df).rename(columns={
+        'avg_price': 'Average Price',
+        'price_percentile': 'Percentile Rank'
+    })
+    st.dataframe(df_pct.style.format({"Average Price": "{:,.0f}", "Percentile Rank": "{:,.0f}"}), use_container_width=True)
 
-    st.subheader("Europe-wide Weighted Average Price")
-    st.dataframe(compute_weighted_avg_price_europe(price_df, load_df), use_container_width=True)
+    

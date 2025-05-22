@@ -23,7 +23,7 @@ def compute_mix_breakdown_by_country(prod_df: pd.DataFrame) -> pd.DataFrame:
     df1['nuclear'] = df1[nuclear_col].sum(axis=1)
     df1['other'] = df1[other_cols].sum(axis=1)
 
-    grouped = df1.groupby(['country_code', 'country_name'])[['renewables', 'nuclear', 'other']].sum()
+    grouped = df1.groupby(['country_name'])[['renewables', 'nuclear', 'other']].sum()
     grouped['total'] = grouped.sum(axis=1)
     grouped.reset_index(inplace=True)
     return grouped
@@ -68,7 +68,7 @@ def compute_total_production_by_country(prod_df: pd.DataFrame) -> pd.DataFrame:
         'nuclear', 'fossil_gas', 'fossil_oil', 'fossil_hard_coal', 'other', 'waste', 'energy_storage'
     ]
 
-    grouped = prod_df.groupby(['country_code', 'country_name'])
+    grouped = prod_df.groupby(['country_name'])
 
     summary = grouped.apply(lambda g: pd.Series({
         'total_1d': g.loc[g['datetime'] >= d1, total_cols].sum().sum(),
@@ -97,7 +97,7 @@ def compute_total_load_by_country(load_df: pd.DataFrame) -> pd.DataFrame:
     now = pd.Timestamp.now(tz='UTC')
     d1, d7, d30 = now - timedelta(days=1), now - timedelta(days=7), now - timedelta(days=30)
     
-    grouped = load_df.groupby(['country_code', 'country_name'])
+    grouped = load_df.groupby(['country_name'])
 
     summary = grouped.apply(lambda g: pd.Series({
         'load_1d': g.loc[g['datetime'] >= d1, 'actual_load'].sum(),
@@ -115,7 +115,7 @@ def compute_avg_price_by_country(price_df: pd.DataFrame) -> pd.DataFrame:
     now = pd.Timestamp.now(tz='UTC')
     d1, d7, d30 = now - timedelta(days=1), now - timedelta(days=7), now - timedelta(days=30)
 
-    grouped = price_df.groupby(['country_code', 'country_name'])
+    grouped = price_df.groupby(['country_name'])
 
     summary = grouped.apply(lambda g: pd.Series({
         'avg_1d': g.loc[g['datetime'] >= d1, 'price'].mean(),
@@ -129,7 +129,7 @@ def compute_price_volatility_by_country(price_df: pd.DataFrame) -> pd.DataFrame:
     now = pd.Timestamp.now(tz='UTC')
     d1, d7, d30 = now - timedelta(days=1), now - timedelta(days=7), now - timedelta(days=30)
 
-    grouped = price_df.groupby(['country_code', 'country_name'])
+    grouped = price_df.groupby(['country_name'])
 
     summary = grouped.apply(lambda g: pd.Series({
         'std_1d': g.loc[g['datetime'] >= d1, 'price'].std(),
