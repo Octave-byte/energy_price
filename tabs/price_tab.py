@@ -13,8 +13,8 @@ def render(price_df, load_df):
     europe_dict = dict(zip(europe_df['period'], europe_df['weighted_avg_price']))
 
     col1, col2 = st.columns(2)
-    col1.metric("Average Price (1 Day)", f"{europe_dict.get('1d', 0)} €/MWh")
-    col2.metric("Average Price (7 Days)", f"{europe_dict.get('7d', 0)} €/MWh")
+    col1.metric("Average Price (1 Day)", f"{europe_dict.get('1d', 0):,.1f} €/MWh")
+    col2.metric("Average Price (7 Days)", f"{europe_dict.get('7d', 0):,.1f} €/MWh")
 
     st.divider()
 
