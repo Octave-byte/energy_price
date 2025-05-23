@@ -11,7 +11,7 @@ st.title("⚡ European Energy Dashboard")
 
 prod_df, load_df, price_df = load_data()
 
-tab1, tab2, tab3 = st.tabs(["💶 Price", "🔋 Production", "📊 Load / Consumption"])
+tab1, tab2, tab3, tab4 = st.tabs(["💶 Price", "🔋 Production", "📊 Consumption"])
 
 with tab1:
     price_tab.render(price_df, load_df)
@@ -21,3 +21,4 @@ with tab2:
 
 with tab3:
     load_tab.render(load_df)
+

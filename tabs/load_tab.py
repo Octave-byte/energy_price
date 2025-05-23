@@ -5,7 +5,7 @@ from utils.helpers import (
 )
 
 def render(load_df):
-    st.subheader("Daily Total Load (Last 30 Days)")
+    st.subheader("Daily Total Consumption (Last 30 Days)")
     daily = compute_daily_total_load_30d(load_df)
     latest = daily.sort_values('day', ascending=False).iloc[0]
 
@@ -18,7 +18,7 @@ def render(load_df):
 
     st.divider()
 
-    st.subheader("Total Load by Country (1 Day, 7 Days, 30 Days)")
+    st.subheader("Total Consumption by Country (1 Day, 7 Days, 30 Days)")
     country_summary = compute_total_load_by_country(load_df).rename(columns={
         'country_name': 'Country',
         'load_1d': 'Load (1 Day)',
